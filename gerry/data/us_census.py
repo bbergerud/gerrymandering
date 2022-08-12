@@ -196,11 +196,9 @@ class TigerShapefile:
         loaded and returned as a GeoDataFrame. Otherwise, the files are
         downloaded and then returned.
         """
-        if os.path.exists(self.filepath):
-            return geopandas.read_file(self.filepath)
-        else:
+        if not os.path.exists(self.filepath):
             self.download()
-            return self.load()
+        return geopandas.read_file(self.filepath)
 
     @property
     def dir(self):
